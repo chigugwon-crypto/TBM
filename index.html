@@ -7,87 +7,60 @@
 <style>
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:#f0f6ff;color:#0f172a;font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;word-break:keep-all;font-size:14px}
-
-/* 3. 교육서명 스타일 밝은 블루 그라데이션 상단 헤더 */
-header{background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 55%,#0284c7 100%);color:#fff;padding:12px 14px;position:sticky;top:0;z-index:10;box-shadow:0 4px 14px rgba(37,99,235,0.22)}
-header .htop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
-header h1{margin:0;font-size:16px;font-weight:800;letter-spacing:-0.3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-header .badge-mode{font-size:11px;background:rgba(255,255,255,0.22);color:#fff;padding:2px 8px;border-radius:99px;font-weight:700}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:rgba(255,255,255,0.2);padding:4px;border-radius:12px;backdrop-filter:blur(4px)}
-.tabs button{border:0;background:none;color:rgba(255,255,255,0.9);padding:9px 4px;border-radius:9px;font-weight:800;font-size:13px;cursor:pointer;transition:all .15s}
-.tabs button.on{background:#ffffff;color:#1d4ed8;box-shadow:0 2px 8px rgba(15,23,42,0.15)}
-
+body{margin:0;background:#f1f5f9;color:#0f172a;font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;word-break:keep-all;font-size:14px}
+header{background:#0f172a;color:#fff;padding:10px 12px;position:sticky;top:0;z-index:5}
+header h1{margin:0 0 8px;font-size:15px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#1e293b;padding:4px;border-radius:12px}
+.tabs button{border:0;background:none;color:#cbd5e1;padding:9px 4px;border-radius:9px;font-weight:700;font-size:13px}
+.tabs button.on{background:#2563eb;color:#fff}
 main{max-width:640px;margin:0 auto;padding:12px}
-.card{background:#fff;border:1px solid #dbeafe;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(37,99,235,0.04)}
-.card h2{margin:0 0 8px;font-size:15px;color:#1e3a8a}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 8px;font-size:15px}
 .sm{font-size:12px;color:#64748b}
-.divider{height:1px;background:#e2e8f0;margin:14px 0}
-label{display:block;font-size:12px;font-weight:700;margin:8px 0 4px;color:#334155}
-input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;font-weight:700;background:#fff;color:#0f172a}
-input:focus,select:focus,textarea:focus{outline:2px solid #3b82f6;border-color:#3b82f6}
-input:disabled,select:disabled{background:#f1f5f9;color:#475569}
-
-button.b{border:0;border-radius:12px;padding:12px;font-weight:800;font-size:14px;width:100%;margin-top:10px;background:#2563eb;color:#fff;cursor:pointer;transition:opacity .15s}
-button.b:active{opacity:.85}
-button.b:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
-button.g{background:#059669}
+label{display:block;font-size:12px;font-weight:700;margin:8px 0 4px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;font-weight:700;background:#fff}
+input:disabled{background:#f1f5f9;color:#475569}
+button.b{border:0;border-radius:12px;padding:12px;font-weight:800;font-size:14px;width:100%;margin-top:10px;background:#2563eb;color:#fff}
+button.b:disabled{background:#e2e8f0;color:#94a3b8}
+button.g{background:#10b981}
 button.r{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
-button.w{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
-button.y{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
-button.s{width:auto;padding:6px 10px;font-size:12px;margin:0;border-radius:8px;cursor:pointer;font-weight:800}
-
-.chk{display:flex;align-items:center;gap:8px;border:1px solid #e2e8f0;border-radius:10px;padding:9px;margin:5px 0;font-weight:700;font-size:13px;white-space:nowrap;cursor:pointer}
-.chk input{width:18px;height:18px;padding:0;accent-color:#10b981;flex-shrink:0}
-.chk.on{background:#ecfdf5;border-color:#34d399;color:#065f46}
+button.s{width:auto;padding:6px 10px;font-size:12px;margin:0;border-radius:8px}
+.chk{display:flex;align-items:center;gap:8px;border:1px solid #e2e8f0;border-radius:10px;padding:9px;margin:5px 0;font-weight:700;font-size:13px;white-space:nowrap}
+.chk input{width:18px;height:18px;padding:0}
+.chk.on{background:#ecfdf5;border-color:#34d399}
 .tbm div{white-space:nowrap;font-size:11px;margin:3px 0}
-
-.padbox{position:relative;height:150px;border:2px dashed #93c5fd;border-radius:12px;background:#f8fafc;overflow:hidden}
+.padbox{position:relative;height:150px;border:2px dashed #cbd5e1;border-radius:12px;background:#f8fafc;overflow:hidden}
 .padbox.ink{border:2px solid #2563eb;background:#fff}
 .padbox canvas{width:100%;height:100%;display:block}
-.padbox .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-weight:700;pointer-events:none;font-size:13px;padding:0 10px;text-align:center}
+.padbox .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-weight:700;pointer-events:none;font-size:13px}
 .padbox.ink .ph{display:none}
 .padbox button{position:absolute;top:6px;right:6px}
-
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
 .cal .h{font-size:11px;font-weight:800;color:#64748b}
-.cal button{color:#0f172a;border:1px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:5px 0;font-weight:800;font-size:12px;cursor:pointer}
+.cal button{color:#0f172a;border:1px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:5px 0;font-weight:800;font-size:12px}
 .cal button small{display:block;font-size:9px;color:#94a3b8;font-weight:700}
 .cal button.sg{background:#ecfdf5;border-color:#6ee7b7}.cal button.sg small{color:#047857}
 .cal button.of{background:#fef2f2;border-color:#fecaca}.cal button.of small{color:#ef4444}
 .cal button.wk{background:#fffbeb;border-color:#fcd34d}.cal button.wk small{color:#b45309}
 .cal button.se{outline:2px solid #2563eb}
 .sun{color:#dc2626!important}.sat{color:#2563eb!important}
-
 .sub{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.sub button{border:1px solid #dbeafe;background:#ffffff;color:#475569;font-weight:800;font-size:12px;padding:8px 11px;border-radius:10px;cursor:pointer}
-.sub button.on{background:#2563eb;color:#fff;border-color:#2563eb;box-shadow:0 2px 6px rgba(37,99,235,0.25)}
-
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #e2e8f0;border-radius:12px;padding:9px 11px;margin:7px 0;flex-wrap:wrap;background:#fff}
-.row.ld{background:#eff6ff;border-color:#93c5fd}
+.sub button{border:0;background:#e2e8f0;color:#475569;font-weight:800;font-size:12px;padding:8px 10px;border-radius:10px}
+.sub button.on{background:#0f172a;color:#fff}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #e2e8f0;border-radius:12px;padding:9px;margin:7px 0;flex-wrap:wrap}
 .row.mn{background:#fffbeb;border-color:#fcd34d}
-.tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:99px;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;white-space:nowrap}
+.tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:99px;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
 .tag.m{background:#fef3c7;color:#92400e;border-color:#fcd34d}
-.tag.c{background:#ecfdf5;color:#047857;border-color:#a7f3d0}
-.tag.l{background:#dbeafe;color:#1e40af;border-color:#93c5fd}
-.row img{height:32px;max-width:76px;object-fit:contain;border:1px solid #e2e8f0;border-radius:6px;background:#fff;padding:2px}
-
-.note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:9px 10px;font-size:12px;margin-top:8px;line-height:1.45}
+.row img{height:30px;max-width:70px;object-fit:contain;border:1px solid #e2e8f0;border-radius:6px;background:#fff}
+.note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px;font-size:12px;margin-top:8px}
 .note.bad{background:#fef2f2;border-color:#fecaca;color:#dc2626}
 .lock{text-align:center;padding:16px;border-radius:14px;margin-top:10px;font-weight:800}
 .lock.rd{background:#fef2f2;border:2px solid #fecaca;color:#dc2626}
 .lock.ok{background:#ecfdf5;border:2px solid #a7f3d0;color:#047857}
-
-#toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;max-width:92%}
-#toast div{padding:11px 16px;border-radius:12px;background:#1e3a8a;color:#fff;font-weight:800;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+#toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;max-width:92%}
+#toast div{padding:11px 16px;border-radius:12px;background:#0f172a;color:#fff;font-weight:800;font-size:13px}
 #toast div.e{background:#dc2626}
-
-/* 모달 (재서명/수정 및 비밀번호 상시 변경용) */
-.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,0.55);z-index:40;display:flex;align-items:center;justify-content:center;padding:14px}
-.modal-card{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:18px;box-shadow:0 12px 32px rgba(15,23,42,0.25);border:1px solid #dbeafe}
-.modal-card h3{margin:0 0 8px;font-size:16px;color:#1e3a8a}
-
-.scroll{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px;margin-bottom:14px;overflow:hidden}
+.scroll{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:6px;margin-bottom:14px}
 
 /* ===== 출력 양식 (샘플 양식과 동일 구조) : 선 굵기는 --b 변수(축소 시 자동 보정) ===== */
 .sh{--b:1px;background:#fff;color:#000;width:760px;margin:0 auto;padding:0;transform-origin:top left;font-family:'Batang','바탕','BatangChe','Noto Serif KR',serif;font-size:15px;line-height:1.3;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -106,11 +79,12 @@ button.s{width:auto;padding:6px 10px;font-size:12px;margin:0;border-radius:8px;c
 .sh .sg td.nm{font-family:sans-serif;font-weight:600;font-size:12px}
 .sh .sg img{height:26px;width:100%;object-fit:contain;display:block}
 .sh .off{color:#777;font-size:11px;font-weight:400}
-
+.tag.c{background:#ecfdf5;color:#047857;border-color:#a7f3d0}
+.scroll{overflow:hidden}
 @media print{
  @page{size:A4 portrait;margin:8mm}
  body{background:#fff}
- header,.np,#toast,#modalRoot{display:none!important}
+ header,.np,#toast{display:none!important}
  main{max-width:none;padding:0}
  .scroll{border:0;padding:0;margin:0;border-radius:0;height:auto!important;overflow:visible;break-after:page;page-break-after:always}
  .scroll:last-child{break-after:auto;page-break-after:auto}
@@ -120,24 +94,19 @@ button.s{width:auto;padding:6px 10px;font-size:12px;margin:0;border-radius:8px;c
 </head>
 <body>
 <header>
-  <div class="htop">
-    <h1>
-      <span>🛡️ 원주 TC TBM 일지 전자서명</span>
-      <span class="badge-mode" id="mode"></span>
-    </h1>
-    <div id="hdrActions"></div>
-  </div>
+  <h1>원주 TC TBM 일지 전자서명 <span class="sm" id="mode" style="color:#93c5fd"></span></h1>
   <div class="tabs">
-    <button data-t="field" onclick="go('field')">✍️ 현장 서명 (CSM/프로)</button>
-    <button data-t="admin" onclick="go('admin')">⚙️ 관리자 모드</button>
+    <button data-t="field" onclick="go('field')">현장 서명</button>
+    <button data-t="admin" onclick="go('admin')">관리자 (월말출력)</button>
   </div>
 </header>
 <main id="app"></main>
-<div id="modalRoot"></div>
 <div id="toast"></div>
 
 <script>
 // ===== 설정: 기기 간 공유가 필요하면 Firebase Realtime Database 주소를 넣으세요 =====
+// 예: const DB_URL = 'https://내프로젝트-default-rtdb.firebaseio.com';
+// 비워두면 이 기기(브라우저)에만 저장됩니다. (주소 뒤에 ?db=주소 를 붙여 열어도 적용)
 const DB_URL = '';
 
 const TBM = [
@@ -149,14 +118,7 @@ const TBM = [
   '- <b>급박한 위험발생시 작업중지</b> 권에 관한 사항(보고체계, 보고방법등)',
   '- <b>특수차량사용시</b> 안전(장소구획, 이삿짐리프트 탑승금지, 보호구착용, 아웃트리거 펼침등)'
 ];
-const CHK = [
-  '근로자 안전모,안전화 착용',
-  'CSM 음주운전 여부 확인',
-  'CSM 추락재해 예방 안전장구 상태',
-  '계절성(혹한기,혹서기)안전조치 상태',
-  '작업중지 대상 위험장소 확인',
-  '특수차량 안전기준 준수상태 확인'
-];
+const CHK = ['근로자 안전모,안전화 착용','CSM 음주운전 여부 확인','CSM 추락재해 예방 안전장구 상태','계절성(혹한기,혹서기)안전조치 상태','작업중지 대상 위험장소 확인','특수차량 안전기준 준수상태 확인'];
 const DOW = ['일','월','화','수','목','금','토'];
 
 // ---------- 유틸 ----------
@@ -179,78 +141,35 @@ const minfo = ym => { const [y, m] = ym.split('-').map(Number); return { first: 
 const keyOf = (date, name) => date + '_' + name.replace(/[.$#\[\]\/\s]/g, '');
 const sample = n => 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="140" height="48"><path d="M12,34 Q32,8 52,30 T92,20 Q112,12 126,34" fill="none" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/><text x="38" y="33" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e293b">${esc(n)}</text></svg>`);
 
-// ---------- 상태 (기본 8개 셀 및 인원 명단 세팅) ----------
-const DEF_VER = '20261117_8cells_v2';
-const defCells = () => [
-  { id: 'BEST', type: 'appliance', name: '베스트', leader: '김세동', leaderSig: '' },
-  { id: 'BASIC', type: 'appliance', name: '베이직', leader: '오성원', leaderSig: '' },
-  { id: 'CHORONG', type: 'appliance', name: '초롱이', leader: '김영진', leaderSig: '' },
-  { id: 'TOP', type: 'appliance', name: 'TOP', leader: '최종환', leaderSig: '' },
-  { id: 'CHUNCHEON', type: 'appliance', name: '춘천피닉스', leader: '방만수', leaderSig: '' },
-  { id: 'CHUNGJU', type: 'appliance', name: '충주이글스', leader: '김정호', leaderSig: '' },
-  { id: 'SOMUL', type: 'appliance', name: '소물팀', leader: '', leaderSig: '' },
-  { id: 'AC_SUPPORT', type: 'appliance', name: '에어컨 지원팀', leader: '장윤중', leaderSig: '' }
+// ---------- 상태: 가전 베이직 + 고정 에어컨 셀 ----------
+const BASIC_NAMES = ['김다빈','오성원','이재현','고도준','홍선일','김성진','지명환','하지현','염명성'];
+const AC_CELLS = [
+  ['AC_WJ_A','원주AC A팀'], ['AC_WJ_B','원주AC B팀'], ['AC_WJ_C','원주AC C팀'],
+  ['AC_CH','춘천AC'], ['AC_CJ_A','충주 AC A팀'], ['AC_CJ_B','충주 AC B팀'],
+  ['AC_HC','홍천AC'], ['AC_JC','제천AC']
 ];
-const defRoster = () => ({
-  BEST: ['김세동', '김환신', '김민현', '고승수', '이원진', '전승구', '서광석', '함형국'],
-  BASIC: ['오성원'],
-  CHORONG: ['김영진', '박선현', '김용락', '김완기', '김태영', '양해준', '안대희', '김동하', '김배경'],
-  TOP: ['최종환', '이성영', '김영준', '원용오', '김현규', '지원탁', '남동훈', '원호성', '박수현'],
-  CHUNCHEON: ['방만수', '김종호', '김규철', '민경재', '윤민호', '이충모', '박도현', '양승원', '김희석', '채윤호', '이주섭', '차성준'],
-  CHUNGJU: ['김정호', '조영행', '구현호', '이병호', '김동식', '김병수', '이대호', '박상현', '나관병', '황정남'],
-  SOMUL: ['김승기', '김봉섭'],
-  AC_SUPPORT: ['장윤중', '장필모', '임성훈']
-});
-
-// 2. 셀 인원 중 셀리더 상단 고정 + 그 외 인원 오름차순(가나다순) 정렬 함수
-function sortRosterList(list, leaderName) {
-  const cleanLeader = String(leaderName || '').trim();
-  const unique = [...new Set((list || []).map(x => String(x || '').trim()).filter(Boolean))];
-  if (cleanLeader && !unique.includes(cleanLeader)) {
-    unique.unshift(cleanLeader);
-  }
-  const others = unique
-    .filter(n => n !== cleanLeader)
-    .sort((a, b) => a.localeCompare(b, 'ko'));
-  return cleanLeader ? [cleanLeader, ...others] : others;
-}
-
+const defCells = () => [
+  { id: 'BASIC', type: 'appliance', name: '베이직', leader: '', leaderSig: '' },
+  ...AC_CELLS.map(([id, name]) => ({ id, type: 'ac', name, leader: '', leaderSig: '' }))
+];
 const fixCfg = c => {
   c = { pin: '1234', opinion: '', ...c };
-  c.holidays = c.holidays || [];
-  c.workdays = c.workdays || [];
-  if (c.defVer !== DEF_VER) {
-    c.defVer = DEF_VER;
-    c.cells = defCells();
-    c.roster = defRoster();
-  }
+  c.holidays = c.holidays || []; c.workdays = c.workdays || [];
   c.cells = (c.cells && c.cells.length ? Array.from(c.cells) : defCells()).filter(Boolean);
   c.cells = c.cells.map(x => ({ ...x, type: x.type || 'appliance' }));
-  // 8개 셀이 가전 기본 목록에서도 한눈에 모두 보이도록 통합 유지
-  c.roster = c.roster || defRoster();
-  // 모든 셀 명단을 리더 상단 고정 + 오름차순으로 정규화
-  c.cells.forEach(cell => {
-    if (c.roster[cell.id]) {
-      c.roster[cell.id] = sortRosterList(c.roster[cell.id], cell.leader);
-    }
-  });
+  // 기존 기본 셀만 남아있는 신규 사이트의 초기 설정을 새 고정 셀 구성으로 교체
+  const legacyDefaults = c.cells.every(x => ['A','B','C','D','E','F','ACA','ACB'].includes(x.id));
+  if (legacyDefaults) c.cells = defCells();
+  c.roster = c.roster || {};
+  if (!Object.prototype.hasOwnProperty.call(c.roster, 'BASIC')) c.roster.BASIC = [...BASIC_NAMES];
   return c;
 };
-
-let S = (() => {
-  try {
-    const v = JSON.parse(ls.get('tbm_state'));
-    return { sigs: v.sigs || {}, offs: v.offs || {}, cfg: fixCfg(v.cfg || {}) };
-  } catch (e) {
-    return { sigs: {}, offs: {}, cfg: fixCfg({}) };
-  }
-})();
+let S = (() => { try { const v = JSON.parse(ls.get('tbm_state')); return { sigs: v.sigs || {}, cfg: fixCfg(v.cfg || {}) }; } catch (e) { return { sigs: {}, cfg: fixCfg({}) }; } })();
 const persist = () => ls.set('tbm_state', JSON.stringify(S));
-
 let tab = 'field', sub = 'print', adminOK = false;
 let date = today(), bound = { name: ls.get('tbm_name') || '', cell: ls.get('tbm_cell') || '' };
 let ftype = 'appliance', fcell = S.cfg.cells.find(c => c.type === 'appliance')?.id || S.cfg.cells[0].id, fname = '';
-let checks = CHK.map(() => false), pad = '', esig = '', esigCleared = false, padDirty = false;
+let checks = CHK.map(() => false), pad = '', lsig = '', padDirty = false;
 let am = today().slice(0, 7), pc = '__all', pm = 'each', md = today();
 let scType = 'appliance', sc = S.cfg.cells.find(c => c.type === 'appliance')?.id || S.cfg.cells[0].id;
 
@@ -260,15 +179,8 @@ const typeLabel = type => type === 'ac' ? '에어컨' : '가전';
 const typeOpts = selected => `<option value="appliance" ${selected === 'appliance' ? 'selected' : ''}>가전</option><option value="ac" ${selected === 'ac' ? 'selected' : ''}>에어컨</option>`;
 const cellOpts = (sel, type) => S.cfg.cells.filter(c => !type || c.type === type).map(c => `<option value="${c.id}" ${c.id === sel ? 'selected' : ''}>${esc(c.name)}${c.leader ? ' (리더 ' + esc(c.leader) + ')' : ''}</option>`).join('');
 const cellName = id => (cellOf(id) || {}).name || id || '-';
-
-// 셀 명단 조회 시 항상 셀리더 최상단 + 가나다 오름차순 반환
-const rost = id => {
-  const c = cellOf(id);
-  return sortRosterList(S.cfg.roster[id] || [], c ? c.leader : '');
-};
-
+const rost = id => S.cfg.roster[id] || [];
 const isOff = ds => S.cfg.holidays.includes(ds) || (dow(ds) === 0 && !S.cfg.workdays.includes(ds));
-const isWorkerOff = (ds, name) => !!(S.offs && S.offs[keyOf(ds, name)]);
 const mySig = ds => Object.values(S.sigs).find(s => s.date === ds && (s.dev === DEV || (bound.name && s.name === bound.name)));
 const monthSigs = ym => Object.values(S.sigs).filter(s => s.date.startsWith(ym));
 
@@ -278,38 +190,18 @@ const rdel = p => DB ? fetch(`${DB}/${p}.json`, { method: 'DELETE' }) : Promise.
 async function poll() {
   if (!DB) return;
   try {
-    const [a, b, o] = await Promise.all([
-      fetch(`${DB}/sigs.json`).then(r => r.json()),
-      fetch(`${DB}/cfg.json`).then(r => r.json()),
-      fetch(`${DB}/offs.json`).then(r => r.json())
-    ]);
-    const ns = { sigs: a || {}, offs: o || {}, cfg: fixCfg({ ...S.cfg, ...(b || {}) }) };
+    const [a, b] = await Promise.all([fetch(`${DB}/sigs.json`).then(r => r.json()), fetch(`${DB}/cfg.json`).then(r => r.json())]);
+    const ns = { sigs: a || {}, cfg: fixCfg({ ...S.cfg, ...(b || {}) }) };
     if (JSON.stringify(ns) !== JSON.stringify(S)) {
       S = ns; persist();
       const ae = document.activeElement;
-      if (!padDirty && !$('#modalRoot').innerHTML && !(ae && /INPUT|SELECT|TEXTAREA/.test(ae.tagName))) render();
+      if (!padDirty && !(ae && /INPUT|SELECT|TEXTAREA/.test(ae.tagName))) render();
     }
   } catch (e) {}
 }
 async function saveSig(rec) { const k = keyOf(rec.date, rec.name); S.sigs[k] = rec; persist(); await rput('sigs/' + k, rec); }
 async function delSig(k) { delete S.sigs[k]; persist(); await rdel('sigs/' + k); }
 async function saveCfg(patch) { S.cfg = fixCfg({ ...S.cfg, ...patch }); persist(); await rput('cfg', S.cfg); }
-async function toggleWorkerOff(ds, name) {
-  const k = keyOf(ds, name);
-  S.offs = S.offs || {};
-  if (S.offs[k]) {
-    delete S.offs[k];
-    persist();
-    await rdel('offs/' + k);
-    toast(`${name} 프로님 [${ds}] 가동으로 전환되었습니다`);
-  } else {
-    S.offs[k] = true;
-    persist();
-    await rput('offs/' + k, true);
-    toast(`${name} 프로님 [${ds}] 휴무로 전환되었습니다`);
-  }
-  render();
-}
 
 function toast(msg, t) {
   $('#toast').innerHTML = `<div class="${t || ''}">${esc(msg)}</div>`;
@@ -320,7 +212,7 @@ function toast(msg, t) {
 function initPad(id, cb) {
   const c = $(id); if (!c) return;
   const r = c.parentElement.getBoundingClientRect();
-  c.width = r.width || 320; c.height = r.height || 150;
+  c.width = r.width; c.height = r.height;
   const x = c.getContext('2d');
   x.lineWidth = 2.8; x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = '#0f172a';
   c.style.touchAction = 'none';
@@ -331,105 +223,12 @@ function initPad(id, cb) {
   c.onpointerup = c.onpointercancel = () => { if (!d) return; d = false; cb(c.toDataURL('image/png')); };
 }
 function clearPad(id, cb) {
-  const c = $(id); if (!c) return;
-  c.getContext('2d').clearRect(0, 0, c.width, c.height);
+  const c = $(id); c.getContext('2d').clearRect(0, 0, c.width, c.height);
   c.parentElement.classList.remove('ink'); padDirty = false; cb('');
-  if (id === '#epad') {
-    esigCleared = true;
-    const prev = $('#existingSigPreview');
-    if (prev) prev.innerHTML = '<span style="color:#dc2626;font-weight:800">기존 서명 지우기 선택됨</span><span class="sm">저장 시 미서명 전환</span>';
-  }
 }
-const padHTML = (id, ph, cb) => `<div class="padbox"><div class="ph">${ph}</div><canvas id="${id}"></canvas><button type="button" class="b s r" onclick="clearPad('#${id}',${cb})">지우기</button></div>`;
-const setPad = v => pad = v, setEsig = v => { esig = v; if (v) esigCleared = false; };
-function closeModal() { $('#modalRoot').innerHTML = ''; padDirty = false; esig = ''; esigCleared = false; }
+const padHTML = (id, ph, cb) => `<div class="padbox"><div class="ph">${ph}</div><canvas id="${id}"></canvas><button class="b s r" onclick="clearPad('#${id}',${cb})">지우기</button></div>`;
+const setPad = v => pad = v, setLsig = v => lsig = v;
 
-// ---------- 4. 관리자 비밀번호(PIN) 언제든 변경 모달 ----------
-function openPinModal() {
-  $('#modalRoot').innerHTML = `
-    <div class="modal-bg" onclick="if(event.target===this)closeModal()">
-      <div class="modal-card">
-        <h3>🔑 관리자 비밀번호(PIN) 변경</h3>
-        <div class="sm" style="margin-bottom:10px">관리자 모드 입장 및 단말기 고정 해제에 사용되는 비밀번호를 즉시 변경합니다.</div>
-        <label>새 비밀번호 입력</label>
-        <input id="newPin1" type="password" inputmode="numeric" placeholder="새 비밀번호 입력" value="${esc(S.cfg.pin)}">
-        <label>새 비밀번호 확인</label>
-        <input id="newPin2" type="password" inputmode="numeric" placeholder="새 비밀번호 다시 입력" value="${esc(S.cfg.pin)}">
-        <div style="display:flex;gap:8px;margin-top:14px">
-          <button type="button" class="b" style="background:#e2e8f0;color:#334155;margin:0" onclick="closeModal()">취소</button>
-          <button type="button" class="b g" style="margin:0" onclick="applyPinChange()">비밀번호 저장</button>
-        </div>
-      </div>
-    </div>`;
-}
-async function applyPinChange() {
-  const p1 = ($('#newPin1')?.value || '').trim();
-  const p2 = ($('#newPin2')?.value || '').trim();
-  if (!p1) return toast('새 비밀번호를 입력해 주세요', 'e');
-  if (p1 !== p2) return toast('비밀번호 확인이 일치하지 않습니다', 'e');
-  await saveCfg({ pin: p1 });
-  closeModal();
-  render();
-  toast('관리자 비밀번호가 변경되었습니다');
-}
-
-// ---------- 1. 관리자 서명 현황판: 서명 완료자 재서명(수정) 및 삭제 모달 ----------
-function openResignModal(dateStr, workerName, cellId) {
-  esig = '';
-  esigCleared = false;
-  const k = keyOf(dateStr, workerName);
-  const existing = S.sigs[k];
-  $('#modalRoot').innerHTML = `
-    <div class="modal-bg" onclick="if(event.target===this)closeModal()">
-      <div class="modal-card">
-        <h3>✍️ 서명 수정 / 재서명 등록</h3>
-        <div class="sm" style="margin-bottom:8px">
-          <b>${esc(dateStr)}</b> · <b>${esc(cellName(cellId))}</b> · <b style="color:#1d4ed8">${esc(workerName)}</b> 프로
-        </div>
-        ${existing ? `<div id="existingSigPreview" class="note" style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><span>기존 서명 미리보기</span><img src="${existing.sig}" style="height:30px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:2px"></div>` : ''}
-        <label>새 서명 그리기 (지우기 후 저장 시 미서명 전환)</label>
-        ${padHTML('epad', esc(workerName) + ' 프로님의 새 서명을 그려주세요', 'setEsig')}
-        <div style="display:flex;gap:8px;margin-top:12px">
-          <button type="button" class="b" style="background:#e2e8f0;color:#334155;margin:0" onclick="closeModal()">취소</button>
-          <button type="button" class="b" style="margin:0" onclick="saveResignModal('${esc(dateStr)}','${esc(workerName)}','${esc(cellId)}')">재서명 저장</button>
-        </div>
-      </div>
-    </div>`;
-  setTimeout(() => initPad('#epad', setEsig), 30);
-}
-async function saveResignModal(dateStr, workerName, cellId) {
-  const k = keyOf(dateStr, workerName);
-  const prev = S.sigs[k];
-  if (!esig) {
-    if (prev && esigCleared) {
-      await delSig(k);
-      closeModal();
-      render();
-      return toast(`${workerName} 프로님의 서명이 지워져 미서명(재서명 가능) 상태로 저장되었습니다`);
-    }
-    return toast('새 서명을 그리거나 [지우기]를 눌러 주세요', 'e');
-  }
-  await saveSig({
-    date: dateStr,
-    name: workerName,
-    cell: cellId || (prev && prev.cell) || sc,
-    sig: esig,
-    dev: (prev && prev.dev) || DEV,
-    manual: true,
-    t: Date.now()
-  });
-  closeModal();
-  render();
-  toast(`${workerName} 프로님의 서명이 수정(재서명)되었습니다`);
-}
-async function adminDeleteSig(dateStr, workerName) {
-  const k = keyOf(dateStr, workerName);
-  if (!S.sigs[k]) return toast('해당 서명 내역이 없습니다', 'e');
-  if (!confirm(`[${dateStr}] ${workerName} 프로님의 서명 완료 기록을 삭제할까요?\n\n삭제하면 미서명 상태로 전환되어 작업자가 단말기에서 다시 서명할 수 있습니다.`)) return;
-  await delSig(k);
-  render();
-  toast(`${workerName} 프로님 서명이 삭제되어 재서명이 허용되었습니다`);
-}
 
 // ---------- 현장 서명 화면 ----------
 function fieldHTML() {
@@ -447,7 +246,6 @@ function fieldHTML() {
   else body = `<label>본인 자필 서명</label>${padHTML('pad', esc(who) + ' 프로님의 서명을 그려주세요', 'setPad')}<button class="b" id="sub" onclick="submitSig()" disabled></button>`;
   const activeCell = isB ? bound.cell : fcell;
   const activeType = isB ? ((cellOf(bound.cell) || {}).type || 'appliance') : ftype;
-  const cObj = cellOf(activeCell);
   const rl = rost(activeCell);
   return `
   <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -461,15 +259,8 @@ function fieldHTML() {
     <label>서명 일자 <span class="${dcls(dow(date))}">(${DOW[dow(date)]}요일)</span></label><input type="date" value="${date}" onchange="setDate(this.value)">
     <label>직군 구분</label><select ${isB ? 'disabled' : ''} onchange="ftype=this.value;fcell=(cellsOfType(ftype)[0]||{}).id||'';fname=$('#nm').value;render()">${typeOpts(activeType)}</select>
     <label>${typeLabel(activeType)} 셀 선택</label><select id="fc" ${isB ? 'disabled' : ''} onchange="fcell=this.value;fname=$('#nm').value;render()">${cellOpts(activeCell, activeType)}</select>
-    <label>CSM(프로) 성명 (셀리더 상단 · 가나다순)</label>
-    <select id="nm" ${isB ? 'disabled' : ''} onchange="fname=this.value">
-      <option value="">${rl.length ? '본인 이름을 선택하세요' : '관리자에게 명단 등록을 요청하세요'}</option>
-      ${rl.map(n => {
-        const isLeader = cObj && cObj.leader === n;
-        return `<option value="${esc(n)}" ${(isB ? bound.name === n : fname === n) ? 'selected' : ''}>${isLeader ? '★ [셀리더] ' : ''}${esc(n)}</option>`;
-      }).join('')}
-    </select>
-    ${rl.length ? '' : '<div class="note bad">현재 셀에 등록된 인원이 없습니다. 관리자 모드의 [셀 명단] 탭에서 인원을 먼저 등록해 주세요.</div>'}
+    <label>CSM(프로) 성명</label><select id="nm" ${isB ? 'disabled' : ''} onchange="fname=this.value"><option value="">${rl.length ? '본인 이름을 선택하세요' : '관리자에게 명단 등록을 요청하세요'}</option>${rl.map(n => `<option value="${esc(n)}" ${fname === n ? 'selected' : ''}>${esc(n)}</option>`).join('')}</select>
+    ${rl.length ? '' : '<div class="note bad">현재 셀에 등록된 인원이 없습니다. 관리자 모드의 셀 명단에서 등록해야 서명할 수 있습니다.</div>'}
     ${body}</div>
   <div class="card"><h2>${ym} 내 일별 서명 현황</h2><div class="cal">${cal}</div></div>`;
 }
@@ -487,7 +278,7 @@ function unbind() {
 }
 async function submitSig() {
   const name = (bound.name || $('#nm').value).trim(), cell = bound.cell || fcell;
-  if (!name) return toast('성명을 선택해 주세요', 'e');
+  if (!name) return toast('성명을 입력해 주세요', 'e');
   if (isOff(date)) return toast('휴무일에는 서명할 수 없습니다', 'e');
   if (!checks.every(Boolean)) return toast('안전조치를 모두 체크해 주세요', 'e');
   if (!pad) return toast('서명란에 서명해 주세요', 'e');
@@ -498,7 +289,7 @@ async function submitSig() {
 }
 
 // ---------- 출력 양식 ----------
-function sheet(ym, cell, recs, workerName) {
+function sheet(ym, cell, recs) {
   const [y, m] = ym.split('-'), last = minfo(ym).last, map = {};
   recs.forEach(r => map[r.date.slice(8)] = r);
   let rows = '';
@@ -506,7 +297,7 @@ function sheet(ym, cell, recs, workerName) {
     rows += '<tr>' + [i, i + 11, i + 22].map((d, g) => {
       const c = g ? 'gl' : '';
       if (d > 31) return `<td class="${c}"></td><td></td><td></td>`;
-      const k = pad2(d), r = map[k], ds = `${ym}-${k}`, off = !r && d <= last && (isOff(ds) || (workerName && isWorkerOff(ds, workerName)));
+      const k = pad2(d), r = map[k], off = !r && d <= last && isOff(`${ym}-${k}`);
       return `<td class="${c}">${m}/${k}</td><td class="nm">${r ? esc(r.name) : off ? '<span class="off">휴무</span>' : ''}</td><td>${r ? `<img src="${r.sig}">` : ''}</td>`;
     }).join('') + '</tr>';
   }
@@ -523,7 +314,7 @@ function sheet(ym, cell, recs, workerName) {
    <tr><td rowspan="3" class="l go" style="padding:2px 6px"><div class="ln sf">${CHK.map(t => `<div>${t}</div>`).join('')}</div></td>
      <td rowspan="2" class="nw" style="font-size:17px;line-height:1.35">TBM<br>리더</td><td class="nw" style="height:40px;font-size:17px">소속</td><td class="l nw" style="font-size:17px">${esc(cell.name)}</td></tr>
    <tr><td class="nw" style="height:44px;line-height:1.15"><span style="font-size:17px">이름</span><br><span style="font-size:11px">(셀장/팀장)</span></td>
-     <td class="l"><div style="display:flex;align-items:center;justify-content:space-between"><span class="nw" style="color:#666;font-size:16px">${lead}</span></div></td></tr>
+     <td class="l"><div style="display:flex;align-items:center;justify-content:space-between"><span class="nw" style="color:#666;font-size:16px">${lead}</span>${cell.leaderSig ? `<img src="${cell.leaderSig}" style="height:36px;max-width:95px;object-fit:contain">` : ''}</div></td></tr>
    <tr><td class="nw" style="height:79px;font-size:17px;line-height:1.35">의견<br>청취</td><td colspan="2" class="l" style="font-size:13px;white-space:pre-wrap">${esc(S.cfg.opinion)}</td></tr>
   </tbody></table>
   <div style="margin:10px 0 6px;font-weight:700;font-size:23px"><span style="font-size:20px;margin-right:8px">■</span>참석자 서명</div>
@@ -540,15 +331,15 @@ function sheetList() {
       const map = {}; cs.forEach(s => { if (!map[s.date] || s.t > map[s.date].t) map[s.date] = s; });
       if (cs.length || pc !== '__all') out.push({ c, recs: Object.values(map) });
     } else {
-      // 인원별 출력 순서도 셀리더 최상단 + 가나다 오름차순 적용
-      const names = sortRosterList([...new Set(cs.map(s => s.name))], c.leader);
-      if (names.length) names.forEach(n => out.push({ c, recs: cs.filter(s => s.name === n), w: n }));
+      const names = [...new Set(cs.map(s => s.name))].sort();
+      if (names.length) names.forEach(n => out.push({ c, recs: cs.filter(s => s.name === n) }));
       else if (pc !== '__all') out.push({ c, recs: [] });
     }
   });
   if (!out.length) out.push({ c: cells[0] || S.cfg.cells[0], recs: [] });
   return out;
 }
+// 화면 폭에 맞춰 축소 (zoom 대신 transform 사용 + 선 굵기 보정)
 function fit() {
   document.querySelectorAll('.scroll').forEach(w => {
     const e = w.querySelector('.sh'); if (!e) return;
@@ -559,7 +350,7 @@ function fit() {
   });
 }
 
-// ---------- PDF 저장 ----------
+// ---------- PDF 저장 (아이폰 대응: 공유 시트 / 다운로드) ----------
 const loadJS = u => new Promise((res, rej) => { const s = document.createElement('script'); s.src = u; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
 async function savePDF() {
   toast('PDF를 만드는 중입니다...');
@@ -592,165 +383,60 @@ async function savePDF() {
 
 // ---------- 관리자 화면 ----------
 function adminHTML() {
-  if (!adminOK) return `<div class="card" style="text-align:center;padding:24px 16px"><h2>🔐 관리자 모드 인증</h2><div class="sm" style="margin-bottom:12px">서명 현황 및 셀 명단 관리를 위해 비밀번호를 입력하세요.</div><input type="password" id="pin" inputmode="numeric" placeholder="관리자 비밀번호 입력" style="text-align:center;letter-spacing:4px" onkeydown="if(event.key==='Enter')login()"><button class="b" onclick="login()">관리자 모드 입장</button></div>`;
-  const tabs = [['print', '🖨️ 출력/미리보기'], ['monitor', '📋 서명 현황판'], ['roster', '👥 셀 명단'], ['off', '📅 휴무일 설정'], ['set', '⚙️ 양식/비밀번호 설정']];
+  if (!adminOK) return `<div class="card" style="text-align:center"><h2>관리자 모드 인증</h2><input type="password" id="pin" inputmode="numeric" placeholder="관리자 비밀번호" style="text-align:center;letter-spacing:4px"><button class="b g" onclick="login()">입장</button></div>`;
+  const tabs = [['print', '출력/미리보기'], ['monitor', '서명 현황판'], ['roster', '셀 명단'], ['off', '휴무일 설정'], ['set', '양식 설정']];
   const ms = monthSigs(am);
-  let h = `<div class="np">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap">
-      <div class="sub" style="margin-bottom:0">${tabs.map(([k, l]) => `<button class="${sub === k ? 'on' : ''}" onclick="sub='${k}';render()">${l}</button>`).join('')}</div>
-      <div style="display:flex;gap:6px">
-        <button class="b s w" onclick="openPinModal()">🔑 비밀번호 변경</button>
-        <button class="b s r" onclick="adminOK=false;render()">잠금</button>
-      </div>
-    </div>
-    <div class="card"><label style="margin-top:0">대상 연월</label><input type="month" value="${am}" onchange="am=this.value||am;render()">
-    <div class="sm" style="margin-top:6px">${am}월 누적 서명 <b>${ms.length}건</b></div></div></div>`;
+  let h = `<div class="np"><div class="sub">${tabs.map(([k, l]) => `<button class="${sub === k ? 'on' : ''}" onclick="sub='${k}';render()">${l}</button>`).join('')}</div>
+  <div class="card"><label style="margin-top:0">대상 연월</label><input type="month" value="${am}" onchange="am=this.value||am;render()">
+  <div class="sm" style="margin-top:6px">${am}월 누적 서명 ${ms.length}건</div></div></div>`;
 
   if (sub === 'print') {
     h += `<div class="np card"><label style="margin-top:0">셀 선택</label><select onchange="pc=this.value;render()"><option value="__all">전체 셀</option>${S.cfg.cells.map(c => `<option value="${c.id}" ${pc === c.id ? 'selected' : ''}>${typeLabel(c.type)} · ${esc(c.name)}</option>`).join('')}</select>
     <label>출력 방식</label><select onchange="pm=this.value;render()"><option value="each">인원별 각 A4 1장</option><option value="mix" ${pm === 'mix' ? 'selected' : ''}>셀 통합 1장 (일자별 서명자 통합)</option></select>
     <button class="b g" onclick="savePDF()">📄 PDF 저장 / 공유 (아이폰 가능)</button>
     <button class="b" style="background:#e2e8f0;color:#334155" onclick="window.print()">🖨 바로 인쇄 (A4 세로)</button></div>`;
-    h += sheetList().map(x => sheet(am, x.c, x.recs, x.w)).join('');
+    h += sheetList().map(x => sheet(am, x.c, x.recs)).join('');
   }
-
-  // 1. 관리자모드 서명 현황판 탭: 서명완료 항목 재서명(수정) 및 삭제 권한 부여
   if (sub === 'monitor') {
     const c = cellOf(sc) || S.cfg.cells[0];
-    if (c) sc = c.id;
     const roster = c ? rost(c.id) : [];
-    const doneRecs = Object.values(S.sigs).filter(x => x.date === md && x.cell === (c && c.id));
-    const doneMap = {};
-    doneRecs.forEach(r => doneMap[r.name] = r);
-
-    // 완료자, 미서명자(가동), 휴무자 모두 셀리더 상단 + 가나다순 정렬 유지
-    const orderedDoneNames = sortRosterList(Object.keys(doneMap), c ? c.leader : '');
-    const offList = roster.filter(n => !doneMap[n] && isWorkerOff(md, n));
-    const missing = roster.filter(n => !doneMap[n] && !isWorkerOff(md, n));
-    const extraSigned = orderedDoneNames.filter(n => !roster.includes(n));
-    const dutyBtn = n => {
-      const off = isWorkerOff(md, n);
-      return `<button type="button" class="b s ${off ? 'r' : 'g'}" onclick="toggleWorkerOff('${esc(md)}','${esc(n)}')">${off ? '휴무' : '가동'}</button>`;
-    };
-
-    h += `<div class="np card"><h2>📋 셀별 실시간 서명 현황판 (가동/휴무 · 재서명 관리)</h2>
+    const done = Object.values(S.sigs).filter(x => x.date === md && x.cell === (c && c.id));
+    const doneNames = new Set(done.map(x => x.name));
+    const missing = roster.filter(n => !doneNames.has(n));
+    h += `<div class="np card"><h2>셀별 실시간 서명 현황</h2>
       <label>직군 구분</label><select onchange="scType=this.value;sc=(cellsOfType(scType)[0]||{}).id||'';render()">${typeOpts(scType)}</select>
       <label>셀 선택</label><select onchange="sc=this.value;render()">${cellOpts(sc, scType)}</select>
       <label>서명 확인 날짜</label><input type="date" value="${md}" onchange="md=this.value||today();render()">
-      <div class="note">각 인원의 <b>[가동]</b> 버튼을 한 번 더 누르면 <b>[휴무]</b>로 전환되며(다시 누르면 가동 복귀), 휴무자는 미서명 인원에서 제외됩니다.</div>
-      <div class="row"><div><b>${c ? esc(c.name) : '셀 미등록'}</b> ${c && c.leader ? `<span class="tag l">★ 리더: ${esc(c.leader)}</span>` : ''}<div class="sm">${md} 기준 등록 ${roster.length}명</div></div><div><b style="color:#047857">완료 ${orderedDoneNames.length}명</b> · <b style="color:#dc2626">미서명 ${missing.length}명</b> · <b style="color:#64748b">휴무 ${offList.length}명</b></div></div>
-
-      <h3 style="font-size:14px;margin:14px 0 6px;color:#065f46">✔ 서명 완료자 (${orderedDoneNames.length}명) — 수정·재서명·삭제 가능</h3>
-      ${orderedDoneNames.length ? orderedDoneNames.map(n => {
-        const rec = doneMap[n];
-        const isLeader = c && c.leader === n;
-        return `<div class="row ${isLeader ? 'ld' : ''}">
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <b>✔ ${esc(n)}</b>
-            ${isLeader ? '<span class="tag l">★ 셀리더</span>' : ''}
-            <span class="tag c">서명 완료</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap">
-            ${rec && rec.sig ? `<img src="${rec.sig}" title="서명 미리보기">` : ''}
-            ${dutyBtn(n)}
-            <button type="button" class="b s w" onclick="openResignModal('${esc(md)}','${esc(n)}','${esc(c.id)}')">✍️ 재서명/수정</button>
-            <button type="button" class="b s r" onclick="adminDeleteSig('${esc(md)}','${esc(n)}')">🗑️ 삭제</button>
-          </div>
-        </div>`;
-      }).join('') : '<div class="note">아직 서명 완료자가 없습니다.</div>'}
-
-      <h3 style="font-size:14px;margin:14px 0 6px;color:#b45309">⏳ 미서명자 · 가동 인원 (${missing.length}명)</h3>
-      ${roster.length ? (missing.length ? missing.map(n => {
-        const isLeader = c && c.leader === n;
-        return `<div class="row ${isLeader ? 'ld' : ''}">
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <b>${esc(n)}</b>
-            ${isLeader ? '<span class="tag l">★ 셀리더</span>' : ''}
-            <span class="tag m">미서명</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
-            ${dutyBtn(n)}
-            <button type="button" class="b s y" onclick="openResignModal('${esc(md)}','${esc(n)}','${esc(c.id)}')">✍️ 직접 서명등록</button>
-          </div>
-        </div>`;
-      }).join('') : '<div class="lock ok">🎉 가동 인원 전원 서명 완료</div>') : '<div class="note bad">해당 셀에 등록된 인원이 없습니다. [셀 명단] 탭에서 인원을 먼저 등록해 주세요.</div>'}
-
-      ${offList.length ? `<h3 style="font-size:14px;margin:14px 0 6px;color:#64748b">🛌 휴무자 (${offList.length}명) — 클릭 시 가동 전환</h3>` + offList.map(n => {
-        const isLeader = c && c.leader === n;
-        return `<div class="row" style="background:#f8fafc">
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <b style="color:#64748b">${esc(n)}</b>
-            ${isLeader ? '<span class="tag l">★ 셀리더</span>' : ''}
-            <span class="tag" style="background:#f1f5f9;color:#475569;border-color:#cbd5e1">휴무</span>
-          </div>
-          <div style="margin-left:auto">${dutyBtn(n)}</div>
-        </div>`;
-      }).join('') : ''}
-
-      ${extraSigned.length ? `<div class="note">명단 외 서명자: ${extraSigned.map(n => esc(n)).join(', ')}</div>` : ''}
-      <button class="b" style="background:#e2e8f0;color:#334155" onclick="render()">🔄 현황 새로고침</button></div>`;
+      <div class="note">현장 서명 데이터가 저장되면 자동으로 갱신됩니다. 서버 공유 설정 시 다른 휴대폰의 서명도 약 6초 간격으로 반영됩니다.</div>
+      <div class="row"><div><b>${c ? esc(c.name) : '셀 미등록'}</b><div class="sm">${md} 기준 등록 인원 ${roster.length}명</div></div><div><b style="color:#047857">완료 ${doneNames.size}명</b> / <b style="color:#dc2626">미서명 ${missing.length}명</b></div></div>
+      <h3 style="font-size:14px;margin:14px 0 6px">서명 완료자 (${doneNames.size}명)</h3>
+      ${doneNames.size ? [...doneNames].map(n => `<div class="row"><span>✔ ${esc(n)}</span><span class="tag c">서명 완료</span></div>`).join('') : '<div class="note">아직 서명 완료자가 없습니다.</div>'}
+      <h3 style="font-size:14px;margin:14px 0 6px">미서명자 (${missing.length}명)</h3>
+      ${roster.length ? (missing.length ? missing.map(n => `<div class="row"><b>${esc(n)}</b><span class="tag m">미서명</span></div>`).join('') : '<div class="lock ok">등록 인원 전원 서명 완료</div>') : '<div class="note bad">해당 셀에 등록된 인원이 없습니다. 셀 명단 탭에서 인원을 먼저 등록해 주세요.</div>'}
+      ${done.filter(x => !roster.includes(x.name)).length ? `<div class="note">명단에 없는 서명자: ${done.filter(x => !roster.includes(x.name)).map(x => esc(x.name)).join(', ')}</div>` : ''}
+      <button class="b" style="background:#e2e8f0;color:#334155" onclick="render()">현황 새로고침</button></div>`;
   }
-
-  // 2. 셀 명단 탭: 셀 무제한 추가 + 셀리더 상단 고정 + 나머지 오름차순(가나다순) 자동 정렬
   if (sub === 'roster') {
     const c = cellOf(sc) || S.cfg.cells.find(x => x.type === scType);
     if (c) sc = c.id;
     const rl = c ? rost(c.id) : [];
-    h += `<div class="np card">
-      <h2>➕ 새 셀 추가 등록</h2>
-      <div class="sm">가전 또는 에어컨 직군에 새로운 셀을 개수 제한 없이 추가할 수 있습니다.</div>
-      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:6px">
-        <div>
-          <label style="margin-top:0">직군 선택</label>
-          <select id="newCellType" onchange="scType=this.value;render()">${typeOpts(scType)}</select>
-        </div>
-        <div>
-          <label style="margin-top:0">신규 셀명</label>
-          <input id="newCellName" placeholder="예: G셀, H셀, 원주1셀">
-        </div>
-      </div>
-      <label>신규 셀리더(팀장) 성명 (선택 · 입력 시 명단 최상단 자동 고정)</label>
-      <input id="newCellLeader" placeholder="예: 김세동 (비워두어도 됩니다)">
-      <button class="b g" onclick="addCell()">+ 새 셀 추가하기</button>
-    </div>
-
-    <div class="np card">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-        <h2 style="margin:0">👥 셀 정보 및 인원 명단 관리</h2>
-        ${c && S.cfg.cells.length > 1 ? `<button type="button" class="b s r" onclick="delCell('${esc(c.id)}')">현재 셀 삭제</button>` : ''}
-      </div>
-      <div class="sm" style="margin-top:4px">셀리더는 명단 <b>최상단에 ★고정</b>되며, 그 외 셀원은 <b>가나다(오름차순)</b>으로 자동 정렬됩니다.</div>
+    h += `<div class="np card"><h2>셀 및 인원 명단 관리</h2><div class="sm">셀명·셀리더·셀원 등록/수정/삭제는 관리자만 가능합니다. 변경 즉시 저장되며, 브라우저를 닫아도 유지됩니다. 여러 기기에서 함께 사용하려면 서버 공유 설정이 필요합니다.</div>
       <label>직군 구분</label><select onchange="scType=this.value;sc=(cellsOfType(scType)[0]||{}).id||'';render()">${typeOpts(scType)}</select>
-      <label>${typeLabel(scType)} 셀 선택 (${cellsOfType(scType).length}개 셀)</label><select onchange="sc=this.value;render()">${cellOpts(sc, scType)}</select>
-
+      <label>${typeLabel(scType)} 셀 목록</label><select onchange="sc=this.value;render()">${cellOpts(sc, scType)}</select>
       ${c ? `<label>셀명 수정</label><input id="cn" value="${esc(c.name)}" placeholder="셀명">
-      <label>★ 셀리더(셀장/팀장) 이름 (저장 시 명단 맨 위에 고정됩니다)</label><input id="ln" value="${esc(c.leader || '')}" placeholder="셀장/팀장 이름 입력">
-      <button class="b" onclick="saveCellInfo()">💾 셀 정보 및 리더 저장</button>
+      <label>TBM 셀리더 이름 (선택, 비우고 저장하면 삭제)</label><input id="ln" value="${esc(c.leader||'')}" placeholder="셀장/팀장 이름">
+      <label>TBM 리더 서명 등록 (선택)</label>${padHTML('lpad', '리더 서명을 그려주세요', 'setLsig')}
+      ${c.leaderSig ? `<div class="sm" style="margin-top:4px">현재 등록된 서명: <img src="${c.leaderSig}" style="height:28px;vertical-align:middle"> <button class="b s r" onclick="delLeaderSig()">서명 삭제</button></div>` : ''}
+      <button class="b" onclick="saveCellInfo()">셀 정보 저장</button>
+      <button class="b r" onclick="deleteCell()">선택한 셀 삭제</button>
       <div class="divider"></div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <label style="margin:0">${esc(c.name)} 인원 명단 (${rl.length}명 · 리더 상단 / 가나다순)</label>
-      </div>
-      ${rl.length ? rl.map((n, i) => {
-        const isLeader = c.leader && c.leader === n;
-        return `<div class="row ${isLeader ? 'ld' : ''}">
-          <div style="display:flex;align-items:center;gap:6px">
-            <span class="sm" style="font-weight:800;min-width:18px">${isLeader ? '★' : i + 1 + '.'}</span>
-            <b>${esc(n)}</b>
-            ${isLeader ? '<span class="tag l">셀리더 (상단고정)</span>' : ''}
-          </div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap">
-            ${!isLeader ? `<button type="button" class="b s w" onclick="setAsLeader('${esc(n)}')">★ 리더지정</button>` : ''}
-            <button type="button" class="b s" style="background:#64748b" onclick="editMember('${esc(n)}')">수정</button>
-            <button type="button" class="b s r" onclick="delMember('${esc(n)}')">삭제</button>
-          </div>
-        </div>`;
-      }).join('') : '<div class="note">등록된 작업자가 없습니다. 아래에서 인원을 추가해 주세요.</div>'}
-      <label>인원 추가 등록 (자동으로 가나다순 정렬됩니다)</label>
-      <input id="rn" placeholder="성명 입력 (여러 명은 쉼표 , 로 구분)" onkeydown="if(event.key==='Enter')addMember()">
-      <button class="b" onclick="addMember()">+ 인원 명단에 추가</button>` : '<div class="note">등록된 셀이 없습니다. 위에서 새 셀을 추가해 주세요.</div>'}
-    </div>`;
+      <label>${esc(c.name)} 인원 명단 (${rl.length}명)</label>
+      ${rl.length ? rl.map((n, i) => `<div class="row"><b>${esc(n)}</b><div style="display:flex;gap:6px"><button class="b s" onclick="editMember(${i})">수정</button><button class="b s r" onclick="delMember(${i})">삭제</button></div></div>`).join('') : '<div class="note">등록된 작업자가 없습니다.</div>'}
+      <label>인원 추가 등록</label><input id="rn" placeholder="성명 입력 (여러 명은 쉼표로 구분)"><button class="b" onclick="addMember()">인원 명단에 추가</button>` : '<div class="note">등록된 셀이 없습니다.</div>'}
+      <div class="divider"></div><h3 style="font-size:14px">새 셀 등록</h3>
+      <label>신규 셀명</label><input id="newCellName" placeholder="예: G셀 또는 강원1셀">
+      <button class="b g" onclick="addCell()">선택한 직군에 셀 추가</button></div>`;
   }
-
   if (sub === 'off') {
     const mm = minfo(am);
     let cal = DOW.map((d, i) => `<div class="h ${dcls(i)}">${d}</div>`).join('') + '<div></div>'.repeat(mm.first);
@@ -762,199 +448,93 @@ function adminHTML() {
     h += `<div class="np card"><h2>${am}월 휴무일 설정</h2><div class="sm">날짜를 누르면 휴무로 지정/해제됩니다. 일요일은 기본 휴무이며, 눌러서 근무일로 바꿀 수 있습니다.</div>
     <div class="cal" style="margin-top:10px">${cal}</div><div class="note">추가 지정 휴무일: ${lst(S.cfg.holidays)}<br>근무로 전환한 일요일: ${lst(S.cfg.workdays)}</div></div>`;
   }
-
-  // 4. 양식, 비밀번호 및 서버/백업 설정 탭
   if (sub === 'set') {
-    h += `<div class="np card"><h2>⚙️ 양식 및 관리자 비밀번호 설정</h2>
-    <label>의견 청취란 (전체 셀 공통 출력)</label><textarea id="op" rows="2" placeholder="특이사항 또는 안전 당부사항 입력">${esc(S.cfg.opinion)}</textarea>
-    <div class="divider"></div>
-    <h3 style="font-size:14px;margin:0 0 6px;color:#1e3a8a">🔑 관리자 비밀번호(PIN) 변경</h3>
-    <div class="sm" style="margin-bottom:6px">언제든 원하는 비밀번호로 변경할 수 있으며, 저장 즉시 적용됩니다.</div>
-    <label>새 관리자 비밀번호(PIN)</label><input id="pn" type="text" inputmode="numeric" value="${esc(S.cfg.pin)}" placeholder="새 비밀번호 입력">
-    <div class="divider"></div>
-    <h3 style="font-size:14px;margin:0 0 6px;color:#1e3a8a">🌐 여러 기기·카톡 실시간 공유 (Firebase 주소)</h3>
-    <div class="sm" style="margin-bottom:6px">비어 있으면 현재 브라우저(이 기기)에만 저장됩니다. 카톡/다른 폰에서도 셀리더·명단을 같이 보려면 Firebase Realtime Database 주소를 입력하세요.</div>
-    <label>Firebase DB 주소 (선택)</label><input id="dbu" type="url" value="${esc(DB)}" placeholder="예: https://내프로젝트.firebaseio.com">
-    <button class="b" onclick="saveSettings()">💾 설정·비밀번호·공유주소 저장</button>
-    <div class="divider"></div>
-    <h3 style="font-size:14px;margin:0 0 6px;color:#1e3a8a">📦 명단·서명 데이터 백업 및 불러오기</h3>
-    <div class="sm" style="margin-bottom:6px">사파리 ↔ 카톡 브라우저 등 다른 브라우저로 저장된 셀리더·셀원 명단을 그대로 옮길 때 사용하세요.</div>
-    <div style="display:flex;gap:8px">
-      <button type="button" class="b w" style="margin-top:4px" onclick="exportBackup()">📋 현재 데이터 복사</button>
-      <button type="button" class="b g" style="margin-top:4px" onclick="importBackup()">📥 백업 데이터 불러오기</button>
-    </div>
-    <div class="note">현재 저장 방식: <b>${DB ? '서버 공유 (여러 기기 동기화)' : '이 기기에만 저장 (같은 브라우저에서만 유지)'}</b></div></div>`;
+    h += `<div class="np card"><h2>양식 설정</h2>
+    <label>의견 청취란 (전체 셀 공통)</label><textarea id="op" rows="2">${esc(S.cfg.opinion)}</textarea>
+    <label>관리자 비밀번호(PIN) 변경</label><input id="pn" type="password" value="${esc(S.cfg.pin)}">
+    <button class="b" onclick="saveSettings()">설정 저장</button>
+    <div class="note">저장 방식: <b>${DB ? '서버 공유 (여러 기기 동기화)' : '이 기기에만 저장'}</b>${DB ? '' : '<br>여러 휴대폰 간 서명 및 명단 공유를 위해서는 Firebase Realtime Database 연결이 필요합니다.'}</div></div>`;
   }
   return h;
 }
-
-function login() {
-  if ($('#pin').value === S.cfg.pin) { adminOK = true; render(); toast('관리자 모드로 입장했습니다'); }
-  else toast('비밀번호가 일치하지 않습니다', 'e');
-}
-
-// 새 셀 추가 (제한 없이 추가 가능 + 리더 입력 시 자동 명단 최상단 등록)
+function login() { if ($('#pin').value === S.cfg.pin) { adminOK = true; render(); } else toast('비밀번호가 일치하지 않습니다', 'e'); }
 async function addCell() {
-  const type = ($('#newCellType')?.value || scType || 'appliance');
   const name = ($('#newCellName')?.value || '').trim();
-  const leader = ($('#newCellLeader')?.value || '').trim();
-  if (!name) return toast('추가할 신규 셀명을 입력하세요', 'e');
-  const id = (type === 'ac' ? 'AC' : 'GA') + Date.now().toString(36) + Math.random().toString(36).slice(2, 4);
-  const cells = [...S.cfg.cells, { id, type, name, leader, leaderSig: '' }];
-  const roster = { ...S.cfg.roster };
-  if (leader) roster[id] = [leader];
-  scType = type;
-  sc = id;
-  await saveCfg({ cells, roster });
-  render();
-  toast(`${typeLabel(type)} [${name}] 셀이 추가되었습니다`);
+  if (!name) return toast('추가할 셀명을 입력하세요', 'e');
+  const id = (scType === 'ac' ? 'AC' : 'GA') + Date.now().toString(36);
+  const cells = [...S.cfg.cells, { id, type: scType, name, leader: '', leaderSig: '' }];
+  await saveCfg({ cells }); sc = id; render(); toast(`${typeLabel(scType)} ${name}이(가) 등록되었습니다`);
 }
-
-// 셀 삭제
-async function delCell(cellId) {
-  const c = cellOf(cellId);
-  if (!c) return;
-  if (S.cfg.cells.length <= 1) return toast('최소 1개의 셀은 유지되어야 합니다', 'e');
-  if (!confirm(`[${typeLabel(c.type)} · ${c.name}] 셀을 삭제할까요?\n(이미 저장된 서명 기록은 보존됩니다)`)) return;
-  const cells = S.cfg.cells.filter(x => x.id !== cellId);
-  const nextCell = cells.find(x => x.type === scType) || cells[0];
-  scType = nextCell.type;
-  sc = nextCell.id;
-  await saveCfg({ cells });
-  render();
-  toast(`${c.name}이(가) 삭제되었습니다`);
-}
-
-// 셀 정보 및 리더 저장 (리더는 자동으로 명단 최상단에 고정 + 나머지 가나다순 정렬)
 async function saveCellInfo() {
   const c = cellOf(sc); if (!c) return;
   const name = ($('#cn')?.value || '').trim();
-  const leader = ($('#ln')?.value || '').trim();
   if (!name) return toast('셀명을 입력하세요', 'e');
-  const cells = S.cfg.cells.map(x => x.id === sc ? { ...x, name, leader } : x);
-  const roster = { ...S.cfg.roster };
-  roster[sc] = sortRosterList(roster[sc] || [], leader);
-  await saveCfg({ cells, roster });
-  render();
-  toast('셀 정보 및 리더 상단 고정 정렬이 저장되었습니다');
+  const cells = S.cfg.cells.map(x => x.id === sc ? { ...x, name, leader: ($('#ln')?.value || '').trim(), leaderSig: lsig || x.leaderSig } : x);
+  lsig = ''; padDirty = false;
+  await saveCfg({ cells }); render(); toast('셀 정보가 저장되었습니다');
 }
-
-// 명단에서 즉시 셀리더로 지정
-async function setAsLeader(memberName) {
+async function deleteCell() {
   const c = cellOf(sc); if (!c) return;
-  const cells = S.cfg.cells.map(x => x.id === sc ? { ...x, leader: memberName } : x);
-  const roster = { ...S.cfg.roster };
-  roster[sc] = sortRosterList(roster[sc] || [], memberName);
+  if (!confirm(`'${c.name}' 셀을 삭제할까요? 셀 명단은 삭제되며 기존 서명 기록은 보존됩니다.`)) return;
+  const cells = S.cfg.cells.filter(x => x.id !== sc);
+  const roster = { ...S.cfg.roster }; delete roster[sc];
   await saveCfg({ cells, roster });
-  render();
-  toast(`${memberName} 님이 ${c.name} 셀리더(최상단 고정)로 지정되었습니다`);
+  sc = (cellsOfType(scType)[0] || cells[0] || {}).id || '';
+  render(); toast('셀과 셀 명단이 저장소에서 삭제되었습니다');
 }
-
-// 인원 추가 (셀리더 상단 고정 + 나머지 오름차순 자동 정렬)
+async function delLeaderSig() {
+  await saveCfg({ cells: S.cfg.cells.map(x => x.id === sc ? { ...x, leaderSig: '' } : x) });
+  render(); toast('리더 서명이 삭제되었습니다');
+}
 async function addMember() {
-  const v = ($('#rn')?.value || '').split(/[,，\n]/).map(x => x.trim()).filter(Boolean);
-  if (!v.length) return toast('추가할 성명을 입력하세요', 'e');
-  const c = cellOf(sc);
-  const roster = { ...S.cfg.roster };
-  const merged = [...rost(sc), ...v];
-  roster[sc] = sortRosterList(merged, c ? c.leader : '');
-  await saveCfg({ roster });
-  render();
-  toast('명단에 추가되어 가나다순으로 정렬되었습니다');
+  const v = $('#rn').value.split(/[,，\n]/).map(x => x.trim()).filter(Boolean);
+  if (!v.length) return toast('성명을 입력하세요', 'e');
+  const roster = { ...S.cfg.roster }, cur = [...rost(sc)];
+  v.forEach(n => { if (!cur.includes(n)) cur.push(n); });
+  roster[sc] = cur; await saveCfg({ roster }); render(); toast('명단에 추가했습니다');
 }
-
-// 인원 이름 수정 (수정 후에도 리더 상단 + 가나다순 자동 유지)
-async function editMember(oldName) {
-  const c = cellOf(sc);
-  const cur = [...rost(sc)];
-  const idx = cur.indexOf(oldName);
-  if (idx < 0) return;
+async function editMember(i) {
+  const cur = [...rost(sc)], oldName = cur[i];
   const next = prompt('작업자 이름을 수정하세요', oldName);
   if (next === null) return;
   const name = next.trim();
   if (!name) return toast('성명을 입력하세요', 'e');
-  if (cur.some((n, i) => i !== idx && n === name)) return toast('이미 등록된 이름입니다', 'e');
-  cur[idx] = name;
-  const newLeader = (c && c.leader === oldName) ? name : (c ? c.leader : '');
-  const cells = S.cfg.cells.map(x => x.id === sc ? { ...x, leader: newLeader } : x);
-  const roster = { ...S.cfg.roster, [sc]: sortRosterList(cur, newLeader) };
-  await saveCfg({ cells, roster });
-  render();
-  toast('인원 이름이 수정 및 정렬되었습니다');
+  if (cur.some((n, idx) => idx !== i && n === name)) return toast('이미 등록된 이름입니다', 'e');
+  cur[i] = name;
+  const roster = { ...S.cfg.roster, [sc]: cur };
+  await saveCfg({ roster }); render(); toast('인원 이름이 수정되었습니다');
 }
-
-// 인원 삭제
-async function delMember(targetName) {
-  const c = cellOf(sc);
-  if (!confirm(`${targetName} 님을 명단에서 삭제할까요? (이미 저장된 서명은 유지됩니다)`)) return;
-  const cur = rost(sc).filter(n => n !== targetName);
-  const newLeader = (c && c.leader === targetName) ? '' : (c ? c.leader : '');
-  const cells = S.cfg.cells.map(x => x.id === sc ? { ...x, leader: newLeader } : x);
-  const roster = { ...S.cfg.roster, [sc]: sortRosterList(cur, newLeader) };
-  await saveCfg({ cells, roster });
-  render();
-  toast(`${targetName} 님이 명단에서 삭제되었습니다`);
+async function delMember(i) {
+  const roster = { ...S.cfg.roster }, cur = [...rost(sc)];
+  if (!confirm(`${cur[i]} 님을 명단에서 삭제할까요? (이미 저장된 서명은 유지됩니다)`)) return;
+  cur.splice(i, 1); roster[sc] = cur; await saveCfg({ roster }); render();
 }
-
 async function toggleOff(ds) {
   let h = [...S.cfg.holidays], w = [...S.cfg.workdays];
   const tg = (a, v) => a.includes(v) ? a.filter(x => x !== v) : [...a, v].sort();
   if (dow(ds) === 0) w = tg(w, ds); else h = tg(h, ds);
   await saveCfg({ holidays: h, workdays: w }); render();
 }
-
 async function saveSettings() {
-  const newPin = ($('#pn')?.value || '').trim();
-  if (!newPin) return toast('관리자 비밀번호를 입력해 주세요', 'e');
-  const newDb = ($('#dbu')?.value || '').trim().replace(/\/$/, '');
-  ls.set('tbm_db', newDb);
-  await saveCfg({ opinion: $('#op').value, pin: newPin });
-  if (newDb !== DB) {
-    toast('공유 주소가 저장되어 새로고침합니다');
-    return setTimeout(() => location.reload(), 600);
-  }
-  render(); toast('양식 설정 및 비밀번호가 저장되었습니다');
+  await saveCfg({ opinion: $('#op').value, pin: $('#pn').value || '1234' });
+  render(); toast('설정이 저장되었습니다');
 }
-function exportBackup() {
-  const raw = JSON.stringify(S);
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(raw).then(() => toast('명단·서명 백업 데이터가 복사되었습니다')).catch(() => prompt('아래 내용을 전체 복사하세요', raw));
-  } else {
-    prompt('아래 내용을 전체 복사하세요', raw);
-  }
-}
-async function importBackup() {
-  const raw = prompt('복사해 둔 백업 데이터를 붙여넣으세요');
-  if (!raw) return;
-  try {
-    const v = JSON.parse(raw);
-    S = { sigs: v.sigs || {}, offs: v.offs || {}, cfg: fixCfg(v.cfg || {}) };
-    persist();
-    if (DB) await Promise.all([rput('cfg', S.cfg), rput('sigs', S.sigs), rput('offs', S.offs)]);
-    render();
-    toast('백업 데이터가 복원되었습니다');
-  } catch (e) {
-    toast('올바른 백업 데이터 형식이 아닙니다', 'e');
-  }
+async function fillSample() {
+  const n = bound.name || '홍길동', cell = bound.cell || (pc !== '__all' ? pc : S.cfg.cells[0].id), s = sample(n);
+  for (let d = 1; d <= 17; d++) { const ds = `${am}-${pad2(d)}`; if (!isOff(ds)) await saveSig({ date: ds, name: n, cell, sig: s, dev: DEV, manual: false, t: Date.now() }); }
+  const c = cellOf(cell);
+  if (c && !c.leaderSig) await saveCfg({ cells: S.cfg.cells.map(x => x.id === cell ? { ...x, leader: x.leader || '김세동', leaderSig: sample(x.leader || '김세동') } : x) });
+  render(); toast('예시 서명을 채웠습니다');
 }
 
 // ---------- 렌더 ----------
-function go(t) {
-  tab = t;
-  if (t === 'admin' && !cellOf(sc)) {
-    scType = 'appliance';
-    sc = (cellsOfType(scType)[0] || {}).id || '';
-  }
-  render();
-}
+function go(t) { tab = t; if (t === 'admin' && !cellOf(sc)) { scType='appliance'; sc=(cellsOfType(scType)[0]||{}).id||''; } render(); }
 function render() {
   document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === tab));
-  $('#mode').textContent = DB ? '실시간 서버공유' : '1인 1단말기';
-  $('#hdrActions').innerHTML = (tab === 'admin' && adminOK)
-    ? `<button type="button" class="b s" style="background:rgba(255,255,255,0.22);color:#fff;border:1px solid rgba(255,255,255,0.4)" onclick="openPinModal()">🔑 비번변경</button>`
-    : '';
+  $('#mode').textContent = DB ? '' : '· 이 기기 저장';
   $('#app').innerHTML = tab === 'field' ? fieldHTML() : adminHTML();
   if (tab === 'field') { upd(); initPad('#pad', v => pad = v); }
+  else if (sub === 'roster' && adminOK) initPad('#lpad', v => lsig = v);
   fit();
 }
 window.addEventListener('resize', fit);
