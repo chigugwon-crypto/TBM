@@ -220,9 +220,9 @@ const fixCfg = c => {
 let S = (() => {
   try {
     const v = JSON.parse(ls.get('tbm_state'));
-    return { sigs: v.sigs || {}, cfg: fixCfg(v.cfg || {}) };
+    return { sigs: v.sigs || {}, offs: v.offs || {}, cfg: fixCfg(v.cfg || {}) };
   } catch (e) {
-    return { sigs: {}, cfg: fixCfg({}) };
+    return { sigs: {}, offs: {}, cfg: fixCfg({}) };
   }
 })();
 const persist = () => ls.set('tbm_state', JSON.stringify(S));
@@ -230,7 +230,7 @@ const persist = () => ls.set('tbm_state', JSON.stringify(S));
 let tab = 'field', sub = 'print', adminOK = false;
 let date = today(), bound = { name: ls.get('tbm_name') || '', cell: ls.get('tbm_cell') || '' };
 let ftype = 'appliance', fcell = S.cfg.cells.find(c => c.type === 'appliance')?.id || S.cfg.cells[0].id, fname = '';
-let checks = CHK.map(() => false), pad = '', esig = '', padDirty = false;
+let checks = CHK.map(() => false), pad = '', esig = '', esigCleared = false, padDirty = false;
 let am = today().slice(0, 7), pc = '__all', pm = 'each', md = today();
 let scType = 'appliance', sc = S.cfg.cells.find(c => c.type === 'appliance')?.id || S.cfg.cells[0].id;
 
@@ -248,6 +248,7 @@ const rost = id => {
 };
 
 const isOff = ds => S.cfg.holidays.includes(ds) || (dow(ds) === 0 && !S.cfg.workdays.includes(ds));
+const isWorkerOff = (ds, name) => !!(S.offs && S.offs[keyOf(ds, name)]);
 const mySig = ds => Object.values(S.sigs).find(s => s.date === ds && (s.dev === DEV || (bound.name && s.name === bound.name)));
 const monthSigs = ym => Object.values(S.sigs).filter(s => s.date.startsWith(ym));
 
@@ -257,8 +258,12 @@ const rdel = p => DB ? fetch(`${DB}/${p}.json`, { method: 'DELETE' }) : Promise.
 async function poll() {
   if (!DB) return;
   try {
-    const [a, b] = await Promise.all([fetch(`${DB}/sigs.json`).then(r => r.json()), fetch(`${DB}/cfg.json`).then(r => r.json())]);
-    const ns = { sigs: a || {}, cfg: fixCfg({ ...S.cfg, ...(b || {}) }) };
+    const [a, b, o] = await Promise.all([
+      fetch(`${DB}/sigs.json`).then(r => r.json()),
+      fetch(`${DB}/cfg.json`).then(r => r.json()),
+      fetch(`${DB}/offs.json`).then(r => r.json())
+    ]);
+    const ns = { sigs: a || {}, offs: o || {}, cfg: fixCfg({ ...S.cfg, ...(b || {}) }) };
     if (JSON.stringify(ns) !== JSON.stringify(S)) {
       S = ns; persist();
       const ae = document.activeElement;
@@ -269,6 +274,22 @@ async function poll() {
 async function saveSig(rec) { const k = keyOf(rec.date, rec.name); S.sigs[k] = rec; persist(); await rput('sigs/' + k, rec); }
 async function delSig(k) { delete S.sigs[k]; persist(); await rdel('sigs/' + k); }
 async function saveCfg(patch) { S.cfg = fixCfg({ ...S.cfg, ...patch }); persist(); await rput('cfg', S.cfg); }
+async function toggleWorkerOff(ds, name) {
+  const k = keyOf(ds, name);
+  S.offs = S.offs || {};
+  if (S.offs[k]) {
+    delete S.offs[k];
+    persist();
+    await rdel('offs/' + k);
+    toast(`${name} 프로님 [${ds}] 가동으로 전환되었습니다`);
+  } else {
+    S.offs[k] = true;
+    persist();
+    await rput('offs/' + k, true);
+    toast(`${name} 프로님 [${ds}] 휴무로 전환되었습니다`);
+  }
+  render();
+}
 
 function toast(msg, t) {
   $('#toast').innerHTML = `<div class="${t || ''}">${esc(msg)}</div>`;
@@ -293,10 +314,15 @@ function clearPad(id, cb) {
   const c = $(id); if (!c) return;
   c.getContext('2d').clearRect(0, 0, c.width, c.height);
   c.parentElement.classList.remove('ink'); padDirty = false; cb('');
+  if (id === '#epad') {
+    esigCleared = true;
+    const prev = $('#existingSigPreview');
+    if (prev) prev.innerHTML = '<span style="color:#dc2626;font-weight:800">기존 서명 지우기 선택됨</span><span class="sm">저장 시 미서명 전환</span>';
+  }
 }
 const padHTML = (id, ph, cb) => `<div class="padbox"><div class="ph">${ph}</div><canvas id="${id}"></canvas><button type="button" class="b s r" onclick="clearPad('#${id}',${cb})">지우기</button></div>`;
-const setPad = v => pad = v, setEsig = v => esig = v;
-function closeModal() { $('#modalRoot').innerHTML = ''; padDirty = false; esig = ''; }
+const setPad = v => pad = v, setEsig = v => { esig = v; if (v) esigCleared = false; };
+function closeModal() { $('#modalRoot').innerHTML = ''; padDirty = false; esig = ''; esigCleared = false; }
 
 // ---------- 4. 관리자 비밀번호(PIN) 언제든 변경 모달 ----------
 function openPinModal() {
@@ -330,6 +356,7 @@ async function applyPinChange() {
 // ---------- 1. 관리자 서명 현황판: 서명 완료자 재서명(수정) 및 삭제 모달 ----------
 function openResignModal(dateStr, workerName, cellId) {
   esig = '';
+  esigCleared = false;
   const k = keyOf(dateStr, workerName);
   const existing = S.sigs[k];
   $('#modalRoot').innerHTML = `
@@ -339,8 +366,8 @@ function openResignModal(dateStr, workerName, cellId) {
         <div class="sm" style="margin-bottom:8px">
           <b>${esc(dateStr)}</b> · <b>${esc(cellName(cellId))}</b> · <b style="color:#1d4ed8">${esc(workerName)}</b> 프로
         </div>
-        ${existing ? `<div class="note" style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><span>기존 서명 미리보기</span><img src="${existing.sig}" style="height:30px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:2px"></div>` : ''}
-        <label>새 서명 그리기 (직접 재서명)</label>
+        ${existing ? `<div id="existingSigPreview" class="note" style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between"><span>기존 서명 미리보기</span><img src="${existing.sig}" style="height:30px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:2px"></div>` : ''}
+        <label>새 서명 그리기 (지우기 후 저장 시 미서명 전환)</label>
         ${padHTML('epad', esc(workerName) + ' 프로님의 새 서명을 그려주세요', 'setEsig')}
         <div style="display:flex;gap:8px;margin-top:12px">
           <button type="button" class="b" style="background:#e2e8f0;color:#334155;margin:0" onclick="closeModal()">취소</button>
@@ -348,18 +375,26 @@ function openResignModal(dateStr, workerName, cellId) {
         </div>
       </div>
     </div>`;
-  setTimeout(() => initPad('#epad', v => esig = v), 30);
+  setTimeout(() => initPad('#epad', setEsig), 30);
 }
 async function saveResignModal(dateStr, workerName, cellId) {
-  if (!esig) return toast('새 서명을 그려주세요', 'e');
   const k = keyOf(dateStr, workerName);
-  const prev = S.sigs[k] || {};
+  const prev = S.sigs[k];
+  if (!esig) {
+    if (prev && esigCleared) {
+      await delSig(k);
+      closeModal();
+      render();
+      return toast(`${workerName} 프로님의 서명이 지워져 미서명(재서명 가능) 상태로 저장되었습니다`);
+    }
+    return toast('새 서명을 그리거나 [지우기]를 눌러 주세요', 'e');
+  }
   await saveSig({
     date: dateStr,
     name: workerName,
-    cell: cellId || prev.cell || sc,
+    cell: cellId || (prev && prev.cell) || sc,
     sig: esig,
-    dev: prev.dev || DEV,
+    dev: (prev && prev.dev) || DEV,
     manual: true,
     t: Date.now()
   });
@@ -443,7 +478,7 @@ async function submitSig() {
 }
 
 // ---------- 출력 양식 ----------
-function sheet(ym, cell, recs) {
+function sheet(ym, cell, recs, workerName) {
   const [y, m] = ym.split('-'), last = minfo(ym).last, map = {};
   recs.forEach(r => map[r.date.slice(8)] = r);
   let rows = '';
@@ -451,7 +486,7 @@ function sheet(ym, cell, recs) {
     rows += '<tr>' + [i, i + 11, i + 22].map((d, g) => {
       const c = g ? 'gl' : '';
       if (d > 31) return `<td class="${c}"></td><td></td><td></td>`;
-      const k = pad2(d), r = map[k], off = !r && d <= last && isOff(`${ym}-${k}`);
+      const k = pad2(d), r = map[k], ds = `${ym}-${k}`, off = !r && d <= last && (isOff(ds) || (workerName && isWorkerOff(ds, workerName)));
       return `<td class="${c}">${m}/${k}</td><td class="nm">${r ? esc(r.name) : off ? '<span class="off">휴무</span>' : ''}</td><td>${r ? `<img src="${r.sig}">` : ''}</td>`;
     }).join('') + '</tr>';
   }
@@ -487,7 +522,7 @@ function sheetList() {
     } else {
       // 인원별 출력 순서도 셀리더 최상단 + 가나다 오름차순 적용
       const names = sortRosterList([...new Set(cs.map(s => s.name))], c.leader);
-      if (names.length) names.forEach(n => out.push({ c, recs: cs.filter(s => s.name === n) }));
+      if (names.length) names.forEach(n => out.push({ c, recs: cs.filter(s => s.name === n), w: n }));
       else if (pc !== '__all') out.push({ c, recs: [] });
     }
   });
@@ -556,7 +591,7 @@ function adminHTML() {
     <label>출력 방식</label><select onchange="pm=this.value;render()"><option value="each">인원별 각 A4 1장</option><option value="mix" ${pm === 'mix' ? 'selected' : ''}>셀 통합 1장 (일자별 서명자 통합)</option></select>
     <button class="b g" onclick="savePDF()">📄 PDF 저장 / 공유 (아이폰 가능)</button>
     <button class="b" style="background:#e2e8f0;color:#334155" onclick="window.print()">🖨 바로 인쇄 (A4 세로)</button></div>`;
-    h += sheetList().map(x => sheet(am, x.c, x.recs)).join('');
+    h += sheetList().map(x => sheet(am, x.c, x.recs, x.w)).join('');
   }
 
   // 1. 관리자모드 서명 현황판 탭: 서명완료 항목 재서명(수정) 및 삭제 권한 부여
@@ -568,17 +603,22 @@ function adminHTML() {
     const doneMap = {};
     doneRecs.forEach(r => doneMap[r.name] = r);
 
-    // 완료자 및 미서명자도 셀리더 상단 + 가나다순 정렬 유지
+    // 완료자, 미서명자(가동), 휴무자 모두 셀리더 상단 + 가나다순 정렬 유지
     const orderedDoneNames = sortRosterList(Object.keys(doneMap), c ? c.leader : '');
-    const missing = roster.filter(n => !doneMap[n]);
+    const offList = roster.filter(n => !doneMap[n] && isWorkerOff(md, n));
+    const missing = roster.filter(n => !doneMap[n] && !isWorkerOff(md, n));
     const extraSigned = orderedDoneNames.filter(n => !roster.includes(n));
+    const dutyBtn = n => {
+      const off = isWorkerOff(md, n);
+      return `<button type="button" class="b s ${off ? 'r' : 'g'}" onclick="toggleWorkerOff('${esc(md)}','${esc(n)}')">${off ? '휴무' : '가동'}</button>`;
+    };
 
-    h += `<div class="np card"><h2>📋 셀별 실시간 서명 현황판 (재서명/삭제 관리)</h2>
+    h += `<div class="np card"><h2>📋 셀별 실시간 서명 현황판 (가동/휴무 · 재서명 관리)</h2>
       <label>직군 구분</label><select onchange="scType=this.value;sc=(cellsOfType(scType)[0]||{}).id||'';render()">${typeOpts(scType)}</select>
       <label>셀 선택</label><select onchange="sc=this.value;render()">${cellOpts(sc, scType)}</select>
       <label>서명 확인 날짜</label><input type="date" value="${md}" onchange="md=this.value||today();render()">
-      <div class="note">서명 완료자의 <b>[재서명/수정]</b>을 누르면 즉시 서명을 다시 그리거나 수정할 수 있으며, <b>[삭제]</b>를 누르면 서명 기록이 초기화되어 작업자가 본인 휴대폰에서 다시 서명할 수 있습니다.</div>
-      <div class="row"><div><b>${c ? esc(c.name) : '셀 미등록'}</b> ${c && c.leader ? `<span class="tag l">★ 리더: ${esc(c.leader)}</span>` : ''}<div class="sm">${md} 기준 등록 인원 ${roster.length}명</div></div><div><b style="color:#047857">완료 ${orderedDoneNames.length}명</b> / <b style="color:#dc2626">미서명 ${missing.length}명</b></div></div>
+      <div class="note">각 인원의 <b>[가동]</b> 버튼을 한 번 더 누르면 <b>[휴무]</b>로 전환되며(다시 누르면 가동 복귀), 휴무자는 미서명 인원에서 제외됩니다.</div>
+      <div class="row"><div><b>${c ? esc(c.name) : '셀 미등록'}</b> ${c && c.leader ? `<span class="tag l">★ 리더: ${esc(c.leader)}</span>` : ''}<div class="sm">${md} 기준 등록 ${roster.length}명</div></div><div><b style="color:#047857">완료 ${orderedDoneNames.length}명</b> · <b style="color:#dc2626">미서명 ${missing.length}명</b> · <b style="color:#64748b">휴무 ${offList.length}명</b></div></div>
 
       <h3 style="font-size:14px;margin:14px 0 6px;color:#065f46">✔ 서명 완료자 (${orderedDoneNames.length}명) — 수정·재서명·삭제 가능</h3>
       ${orderedDoneNames.length ? orderedDoneNames.map(n => {
@@ -590,26 +630,42 @@ function adminHTML() {
             ${isLeader ? '<span class="tag l">★ 셀리더</span>' : ''}
             <span class="tag c">서명 완료</span>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+          <div style="display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap">
             ${rec && rec.sig ? `<img src="${rec.sig}" title="서명 미리보기">` : ''}
+            ${dutyBtn(n)}
             <button type="button" class="b s w" onclick="openResignModal('${esc(md)}','${esc(n)}','${esc(c.id)}')">✍️ 재서명/수정</button>
             <button type="button" class="b s r" onclick="adminDeleteSig('${esc(md)}','${esc(n)}')">🗑️ 삭제</button>
           </div>
         </div>`;
       }).join('') : '<div class="note">아직 서명 완료자가 없습니다.</div>'}
 
-      <h3 style="font-size:14px;margin:14px 0 6px;color:#b45309">⏳ 미서명자 (${missing.length}명)</h3>
+      <h3 style="font-size:14px;margin:14px 0 6px;color:#b45309">⏳ 미서명자 · 가동 인원 (${missing.length}명)</h3>
       ${roster.length ? (missing.length ? missing.map(n => {
         const isLeader = c && c.leader === n;
-        return `<div class="row">
-          <div style="display:flex;align-items:center;gap:6px">
+        return `<div class="row ${isLeader ? 'ld' : ''}">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
             <b>${esc(n)}</b>
             ${isLeader ? '<span class="tag l">★ 셀리더</span>' : ''}
             <span class="tag m">미서명</span>
           </div>
-          <button type="button" class="b s y" onclick="openResignModal('${esc(md)}','${esc(n)}','${esc(c.id)}')">✍️ 직접 서명등록</button>
+          <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+            ${dutyBtn(n)}
+            <button type="button" class="b s y" onclick="openResignModal('${esc(md)}','${esc(n)}','${esc(c.id)}')">✍️ 직접 서명등록</button>
+          </div>
         </div>`;
-      }).join('') : '<div class="lock ok">🎉 등록 인원 전원 서명 완료</div>') : '<div class="note bad">해당 셀에 등록된 인원이 없습니다. [셀 명단] 탭에서 인원을 먼저 등록해 주세요.</div>'}
+      }).join('') : '<div class="lock ok">🎉 가동 인원 전원 서명 완료</div>') : '<div class="note bad">해당 셀에 등록된 인원이 없습니다. [셀 명단] 탭에서 인원을 먼저 등록해 주세요.</div>'}
+
+      ${offList.length ? `<h3 style="font-size:14px;margin:14px 0 6px;color:#64748b">🛌 휴무자 (${offList.length}명) — 클릭 시 가동 전환</h3>` + offList.map(n => {
+        const isLeader = c && c.leader === n;
+        return `<div class="row" style="background:#f8fafc">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <b style="color:#64748b">${esc(n)}</b>
+            ${isLeader ? '<span class="tag l">★ 셀리더</span>' : ''}
+            <span class="tag" style="background:#f1f5f9;color:#475569;border-color:#cbd5e1">휴무</span>
+          </div>
+          <div style="margin-left:auto">${dutyBtn(n)}</div>
+        </div>`;
+      }).join('') : ''}
 
       ${extraSigned.length ? `<div class="note">명단 외 서명자: ${extraSigned.map(n => esc(n)).join(', ')}</div>` : ''}
       <button class="b" style="background:#e2e8f0;color:#334155" onclick="render()">🔄 현황 새로고침</button></div>`;
@@ -687,7 +743,7 @@ function adminHTML() {
     <div class="cal" style="margin-top:10px">${cal}</div><div class="note">추가 지정 휴무일: ${lst(S.cfg.holidays)}<br>근무로 전환한 일요일: ${lst(S.cfg.workdays)}</div></div>`;
   }
 
-  // 4. 양식 및 비밀번호 상시 변경 탭
+  // 4. 양식, 비밀번호 및 서버/백업 설정 탭
   if (sub === 'set') {
     h += `<div class="np card"><h2>⚙️ 양식 및 관리자 비밀번호 설정</h2>
     <label>의견 청취란 (전체 셀 공통 출력)</label><textarea id="op" rows="2" placeholder="특이사항 또는 안전 당부사항 입력">${esc(S.cfg.opinion)}</textarea>
@@ -695,8 +751,19 @@ function adminHTML() {
     <h3 style="font-size:14px;margin:0 0 6px;color:#1e3a8a">🔑 관리자 비밀번호(PIN) 변경</h3>
     <div class="sm" style="margin-bottom:6px">언제든 원하는 비밀번호로 변경할 수 있으며, 저장 즉시 적용됩니다.</div>
     <label>새 관리자 비밀번호(PIN)</label><input id="pn" type="text" inputmode="numeric" value="${esc(S.cfg.pin)}" placeholder="새 비밀번호 입력">
-    <button class="b" onclick="saveSettings()">💾 설정 및 비밀번호 저장</button>
-    <div class="note">저장 방식: <b>${DB ? '서버 공유 (여러 기기 동기화)' : '이 기기에만 저장'}</b>${DB ? '' : '<br>여러 휴대폰 간 서명 및 명단 공유를 위해서는 Firebase Realtime Database 연결이 필요합니다.'}</div></div>`;
+    <div class="divider"></div>
+    <h3 style="font-size:14px;margin:0 0 6px;color:#1e3a8a">🌐 여러 기기·카톡 실시간 공유 (Firebase 주소)</h3>
+    <div class="sm" style="margin-bottom:6px">비어 있으면 현재 브라우저(이 기기)에만 저장됩니다. 카톡/다른 폰에서도 셀리더·명단을 같이 보려면 Firebase Realtime Database 주소를 입력하세요.</div>
+    <label>Firebase DB 주소 (선택)</label><input id="dbu" type="url" value="${esc(DB)}" placeholder="예: https://내프로젝트.firebaseio.com">
+    <button class="b" onclick="saveSettings()">💾 설정·비밀번호·공유주소 저장</button>
+    <div class="divider"></div>
+    <h3 style="font-size:14px;margin:0 0 6px;color:#1e3a8a">📦 명단·서명 데이터 백업 및 불러오기</h3>
+    <div class="sm" style="margin-bottom:6px">사파리 ↔ 카톡 브라우저 등 다른 브라우저로 저장된 셀리더·셀원 명단을 그대로 옮길 때 사용하세요.</div>
+    <div style="display:flex;gap:8px">
+      <button type="button" class="b w" style="margin-top:4px" onclick="exportBackup()">📋 현재 데이터 복사</button>
+      <button type="button" class="b g" style="margin-top:4px" onclick="importBackup()">📥 백업 데이터 불러오기</button>
+    </div>
+    <div class="note">현재 저장 방식: <b>${DB ? '서버 공유 (여러 기기 동기화)' : '이 기기에만 저장 (같은 브라우저에서만 유지)'}</b></div></div>`;
   }
   return h;
 }
@@ -819,8 +886,36 @@ async function toggleOff(ds) {
 async function saveSettings() {
   const newPin = ($('#pn')?.value || '').trim();
   if (!newPin) return toast('관리자 비밀번호를 입력해 주세요', 'e');
+  const newDb = ($('#dbu')?.value || '').trim().replace(/\/$/, '');
+  ls.set('tbm_db', newDb);
   await saveCfg({ opinion: $('#op').value, pin: newPin });
+  if (newDb !== DB) {
+    toast('공유 주소가 저장되어 새로고침합니다');
+    return setTimeout(() => location.reload(), 600);
+  }
   render(); toast('양식 설정 및 비밀번호가 저장되었습니다');
+}
+function exportBackup() {
+  const raw = JSON.stringify(S);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(raw).then(() => toast('명단·서명 백업 데이터가 복사되었습니다')).catch(() => prompt('아래 내용을 전체 복사하세요', raw));
+  } else {
+    prompt('아래 내용을 전체 복사하세요', raw);
+  }
+}
+async function importBackup() {
+  const raw = prompt('복사해 둔 백업 데이터를 붙여넣으세요');
+  if (!raw) return;
+  try {
+    const v = JSON.parse(raw);
+    S = { sigs: v.sigs || {}, offs: v.offs || {}, cfg: fixCfg(v.cfg || {}) };
+    persist();
+    if (DB) await Promise.all([rput('cfg', S.cfg), rput('sigs', S.sigs), rput('offs', S.offs)]);
+    render();
+    toast('백업 데이터가 복원되었습니다');
+  } catch (e) {
+    toast('올바른 백업 데이터 형식이 아닙니다', 'e');
+  }
 }
 
 // ---------- 렌더 ----------
